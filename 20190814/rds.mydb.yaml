@@ -1,0 +1,30 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mydb
+  namespace: service-binding-demo
+  labels:
+    app: mydb
+type: Opaque
+data:
+  DB_USERNAME: cG9zdGdyZXM= #postgres
+  DB_PASSWORD: cGFzc3dvcmRvcnNvbWV0aGluZw== #passwordorsomething
+---
+apiVersion: aws.pmacik.dev/v1alpha1
+kind: RDSDatabase
+metadata:
+  name: mydb
+  namespace: service-binding-demo
+  labels:
+    app: mydb
+spec:
+  class: db.t2.micro
+  engine: postgres
+  dbName: mydb
+  name: mydb
+  password:
+    key: DB_PASSWORD
+    name: mydb
+  username: postgres
+  size: 10

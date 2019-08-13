@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bash-app
+  namespace: service-binding-demo
+spec:
+  selector:
+    matchLabels:
+      app: bash-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: bash-app
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: bash-app
+          image: quay.io/pmacik/list-mydb-env
+          imagePullPolicy: Always
