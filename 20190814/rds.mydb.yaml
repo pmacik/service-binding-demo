@@ -27,4 +27,5 @@ spec:
     key: DB_PASSWORD
     name: mydb
   username: postgres
+  deleteProtection: true
   size: 10
